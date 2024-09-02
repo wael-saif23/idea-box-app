@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:idea_box_app/views/splash_view.dart';
 
 void main() {
   runApp(const IdeaBoxApp());
@@ -10,10 +11,8 @@ class IdeaBoxApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return const MaterialApp(
+      home: SplashView(),
     );
   }
 }
