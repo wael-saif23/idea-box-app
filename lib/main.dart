@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:idea_box_app/core/helper_functions/app_routes.dart';
 import 'package:idea_box_app/views/splash_view.dart';
 
 void main() {
@@ -12,6 +13,9 @@ class IdeaBoxApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      
+      initialRoute: AppRoutes.splash,
+      onGenerateRoute: AppRoutes.onGenerateRoute,
       home: SplashView(),
     );
   }
