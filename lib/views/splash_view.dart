@@ -1,38 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:idea_box_app/controller/splash_image_controller.dart';
-import 'package:idea_box_app/core/utils/styles/app_images.dart';
+import 'package:idea_box_app/core/helper_functions/app_routes.dart';
+
+import 'package:idea_box_app/views/widgets/custom_splash_Image.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
-
 
   @override
   State<SplashView> createState() => _SplashViewState();
 }
 
-
-
 class _SplashViewState extends State<SplashView> {
+  final SplashImageController _splashImageController = SplashImageController();
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 0), () {
+      _splashImageController.changeContainerAttrbutes();
+    });
+    Future.delayed(const Duration(milliseconds: 2500), () {
+      Navigator.pushReplacementNamed(context, AppRoutes.homeView);
+    });
+  }
 
   @override
-void initState() {
-  super.initState();
-  
-} 
+  void dispose() {
+    _splashImageController.dispose();
+    super.dispose();
+  }
 
-
-  final SplashImageController splashImageController = SplashImageController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: AnimatedContainer(
-          duration: const Duration(seconds: 2),
-          child: Image.asset(
-            AppImages.imagesToSplashView,
-            height: splashImageController.height,
-          ),
+        child: CustomSplashImage(
+          splashImageController: _splashImageController,
         ),
       ),
     );
