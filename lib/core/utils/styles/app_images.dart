@@ -13,5 +13,9 @@ class AppImages {
   /// Assets for imagesNoteImage
   /// assets/images/note_image.svg
   static const String imagesNoteImage = "assets/images/note_image.svg";
+
+  /// Assets for imagesToSplashView
+  /// assets/images/to_splash_view.png
+  static const String imagesToSplashView = "assets/images/to_splash_view.png";
 }
 
