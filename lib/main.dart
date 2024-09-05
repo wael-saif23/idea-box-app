@@ -6,11 +6,11 @@ import 'package:idea_box_app/core/helper_functions/app_style.dart';
 import 'package:idea_box_app/model/note_model.dart';
 import 'package:idea_box_app/model/note_model_Adaptor.dart';
 
-void main() {
+void main()async {
   WidgetsFlutterBinding.ensureInitialized();
-  Hive.initFlutter();
-  Hive.registerAdapter(NoteModelAdapter());
-  Hive.openBox<NoteModel>(HiveConstants.noteBox);
+  await Hive.initFlutter();
+ Hive.registerAdapter(NoteModelAdapter());
+  await Hive.openBox<NoteModel>(HiveConstants.noteBox);
   runApp(const IdeaBoxApp());
 }
 
