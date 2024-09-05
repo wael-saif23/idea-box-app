@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:idea_box_app/core/constants/hive_constants.dart';
 import 'package:idea_box_app/core/helper_functions/app_routes.dart';
 import 'package:idea_box_app/core/helper_functions/app_style.dart';
+import 'package:idea_box_app/model/note_model.dart';
+import 'package:idea_box_app/model/note_model_Adaptor.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Hive.initFlutter();
+  Hive.registerAdapter(NoteModelAdapter());
+  Hive.openBox<NoteModel>(HiveConstants.noteBox);
   runApp(const IdeaBoxApp());
 }
 
