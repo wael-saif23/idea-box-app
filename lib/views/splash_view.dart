@@ -17,7 +17,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 0), () {
+    Future.delayed(const Duration(milliseconds: 750), () {
       _splashImageController.changeContainerAttrbutes();
     });
     Future.delayed(const Duration(milliseconds: 2500), () {

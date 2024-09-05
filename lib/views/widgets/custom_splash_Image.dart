@@ -13,7 +13,6 @@ class _CustomSplashImageState extends State<CustomSplashImage> {
   @override
   void initState() {
     super.initState();
-    
     widget.splashImageController.addListener(() {
       setState(() {});
     });
