@@ -13,7 +13,7 @@ class AppRoutes {
 
           case homeView:
         return MaterialPageRoute(
-          builder: (context) => const HomeView(),);
+          builder: (context) =>  HomeView(),);
       
       default:
         return MaterialPageRoute(

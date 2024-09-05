@@ -16,9 +16,9 @@ class CustomNoteItem extends StatelessWidget {
         boxShadow: const [
           BoxShadow(
             color: AppColors.gray,
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
+            spreadRadius: 2,
+            blurRadius: 3,
+            offset: Offset(0, 1), // changes position of shadow
           ),
         ],
       ),
