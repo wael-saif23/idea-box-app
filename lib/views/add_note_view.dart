@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:idea_box_app/core/utils/styles/app_colors.dart';
 import 'package:idea_box_app/views/widgets/add_note_view_body.dart';
-import 'package:idea_box_app/views/widgets/colors_wedget.dart';
+
 import 'package:idea_box_app/views/widgets/custom_button.dart';
 
 class AddNoteView extends StatelessWidget {
@@ -13,8 +13,7 @@ class AddNoteView extends StatelessWidget {
       floatingActionButton: _getFloatingActionButton(context),
       appBar: _getAppBar(context),
       body: const AddNoteViewBody(),
-      
-    );
+      );
   }
 
   AppBar _getAppBar(BuildContext context) {

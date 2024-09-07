@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:idea_box_app/model/note_model.dart';
 import 'package:idea_box_app/views/add_note_view.dart';
 import 'package:idea_box_app/views/details_view.dart';
+import 'package:idea_box_app/views/edit_note_view.dart';
 import 'package:idea_box_app/views/home_view.dart';
 import 'package:idea_box_app/views/splash_view.dart';
 
@@ -8,7 +10,8 @@ class AppRoutes {
   static const String splash = '/';
   static const String homeView = '/home view';
   static const String detailsView = '/details view';
-  static const String addNoteView = '/add note view';  
+  static const String addNoteView = '/add note view';
+  static const String editNoteView = '/edit note view';
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case splash:
@@ -18,13 +21,22 @@ class AppRoutes {
 
       case homeView:
         return MaterialPageRoute(
-          builder: (context) =>const HomeView(),
+          builder: (context) => const HomeView(),
         );
 
       case detailsView:
+        final NoteModel note = settings.arguments as NoteModel;
         return MaterialPageRoute(
-          builder: (context) => const DetailsView(),
+          builder: (context) => DetailsView(
+            theNote: note,
+          ),
           settings: RouteSettings(arguments: settings.arguments),
+        );
+
+      case editNoteView:
+        
+        return MaterialPageRoute(
+          builder: (context) => const EditNoteView(),
         );
 
       case addNoteView:
