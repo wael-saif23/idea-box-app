@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:idea_box_app/views/widgets/add_note_view_body.dart';
+import 'package:idea_box_app/views/widgets/custom_button.dart';
 
 class AddNoteView extends StatelessWidget {
   const AddNoteView({super.key});
@@ -6,9 +8,39 @@ class AddNoteView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Add Note'),
+      appBar: _getAppBar(context),
+      body: const AddNoteViewBody(),
+    );
+  }
+
+  AppBar _getAppBar(BuildContext context) {
+    return AppBar(
+      leading: Row(
+        children: [
+          const SizedBox(
+            width: 16,
+          ),
+          Expanded(
+            child: CustomButton(
+              iconData: Icons.arrow_back,
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
+        ],
       ),
+      title: const Text('Add Note'),
+      actions: [
+        CustomButton(iconData: Icons.search, onTap: () {}),
+        const SizedBox(
+          width: 16,
+        ),
+        CustomButton(iconData: Icons.priority_high_rounded, onTap: () {}),
+        const SizedBox(
+          width: 16,
+        ),
+      ],
     );
   }
 }

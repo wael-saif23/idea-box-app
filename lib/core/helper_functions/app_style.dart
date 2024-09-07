@@ -6,11 +6,15 @@ abstract class AppStyle {
   static ThemeData? themeData() {
     return ThemeData(
       scaffoldBackgroundColor: AppColors.black,
+      textSelectionTheme: const TextSelectionThemeData(
+        selectionColor: Colors.white30,
+        cursorColor: Colors.white30,
+        selectionHandleColor: Colors.white30,
+      ),
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.black,
         elevation: 0,
         titleTextStyle: AppFonts.NunitoSemiBold43,
-        iconTheme: IconThemeData(color: AppColors.orange),
       ),
     );
   }
