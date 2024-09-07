@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:idea_box_app/core/helper_functions/app_routes.dart';
+import 'package:idea_box_app/core/utils/styles/app_colors.dart';
 import 'package:idea_box_app/model/note_model.dart';
 import 'package:idea_box_app/views/widgets/custom_button.dart';
 import 'package:idea_box_app/views/widgets/custom_note_item.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: _getFloatingActionButton(context),
       appBar: _getAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -21,8 +23,7 @@ class HomeView extends StatelessWidget {
               child: Expanded(
                 child: CustomNoteItem(
                   onPressedToDatailsView: () {
-                    Navigator.pushNamed(
-                        context, AppRoutes.detailsView,
+                    Navigator.pushNamed(context, AppRoutes.detailsView,
                         arguments: notes[index]);
                   },
                   colorCode: notes[index].colorCode,
@@ -36,10 +37,20 @@ class HomeView extends StatelessWidget {
     );
   }
 
+  FloatingActionButton _getFloatingActionButton(BuildContext context) {
+    return FloatingActionButton(
+      backgroundColor: AppColors.gray,
+      foregroundColor: AppColors.orange,
+      onPressed: () {
+        Navigator.pushNamed(context, AppRoutes.addNoteView);
+      },
+      child: const Icon(Icons.add),
+    );
+  }
+
   AppBar _getAppBar() {
     return AppBar(
       title: const Text('Notes'),
-      
       actions: [
         CustomButton(iconData: Icons.search, onTap: () {}),
         const SizedBox(
@@ -53,8 +64,7 @@ class HomeView extends StatelessWidget {
     );
   }
 
-
- final List<NoteModel> notes = const [
+  final List<NoteModel> notes = const [
     NoteModel(
       idAtDatabase: 0,
       title: 'Note 1: lkjalsjdfasdfjasdjfjsfjiasjpjsg',
@@ -74,6 +84,4 @@ class HomeView extends StatelessWidget {
       colorCode: 0xffFFD7C4,
     ),
   ];
-
-
 }
