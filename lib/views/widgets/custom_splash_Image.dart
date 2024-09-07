@@ -22,7 +22,7 @@ class _CustomSplashImageState extends State<CustomSplashImage> {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(seconds: 2),
-      curve: Curves.easeInOut,
+      curve: Curves.easeIn,
       height: widget.splashImageController.height,
       width: widget.splashImageController.width,
       child: Image.asset(

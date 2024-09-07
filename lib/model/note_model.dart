@@ -4,7 +4,7 @@ class NoteModel {
   final String description;
   final int colorCode;
 
-  NoteModel({
+  const NoteModel({
     required this.colorCode,
     required this.title,
     required this.description,
