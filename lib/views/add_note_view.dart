@@ -4,16 +4,26 @@ import 'package:idea_box_app/views/widgets/add_note_view_body.dart';
 
 import 'package:idea_box_app/views/widgets/custom_button.dart';
 
-class AddNoteView extends StatelessWidget {
+class AddNoteView extends StatefulWidget {
   const AddNoteView({super.key});
 
   @override
+  State<AddNoteView> createState() => _AddNoteViewState();
+}
+
+class _AddNoteViewState extends State<AddNoteView> {
+final GlobalKey _formKey = GlobalKey<FormState>();
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: _getFloatingActionButton(context),
-      appBar: _getAppBar(context),
-      body: const AddNoteViewBody(),
-      );
+    return Form(
+      key: _formKey,
+      child: Scaffold(
+        floatingActionButton: _getFloatingActionButton(context),
+        appBar: _getAppBar(context),
+        body: const AddNoteViewBody(),
+        ),
+    );
   }
 
   AppBar _getAppBar(BuildContext context) {
@@ -34,16 +44,7 @@ class AddNoteView extends StatelessWidget {
         ],
       ),
       title: const Text('Add Note'),
-      actions: [
-        CustomButton(iconData: Icons.search, onTap: () {}),
-        const SizedBox(
-          width: 16,
-        ),
-        CustomButton(iconData: Icons.priority_high_rounded, onTap: () {}),
-        const SizedBox(
-          width: 16,
-        ),
-      ],
+      
     );
   }
 
@@ -51,7 +52,11 @@ class AddNoteView extends StatelessWidget {
     return FloatingActionButton(
       backgroundColor: AppColors.gray,
       foregroundColor: AppColors.orange,
-      onPressed: () {},
+      onPressed: () {
+        // if (_formKey.currentState!.validate()) {
+        //   Navigator.pushNamed(context, AppRoutes.homeView);
+        // }
+      },
       child: const Icon(Icons.check),
     );
   }

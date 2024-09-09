@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:idea_box_app/controller/write_note_cubit/write_note_cubit_cubit.dart';
 import 'package:idea_box_app/core/utils/styles/app_colors.dart';
 
-class ColorsWedget extends StatefulWidget {
-  const ColorsWedget({super.key});
-
-  @override
-  State<ColorsWedget> createState() => _ColorsWedgetState();
-}
-
-class _ColorsWedgetState extends State<ColorsWedget> {
-  int colorIndex = -1;
+class ColorsWedget extends StatelessWidget {
+  const ColorsWedget({super.key, required this.activeColorCode});
+  final int activeColorCode ;
   final List<int> _colorsCode = const [
     0xff000000,
     0xff9E9E9E,
@@ -36,7 +31,7 @@ class _ColorsWedgetState extends State<ColorsWedget> {
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemBuilder: (itemBuilder, index) {
-          return _getColorsItem(_colorsCode[index], index);
+          return _getColorsItem(index , context);
         },
         separatorBuilder: (separatorBuilder, index) => const VerticalDivider(
           color: AppColors.yellow,
@@ -48,19 +43,19 @@ class _ColorsWedgetState extends State<ColorsWedget> {
     );
   }
 
-  Widget? _getColorsItem(int colorCode, int index) {
-    bool isSelected = index == colorIndex;
+  Widget? _getColorsItem(int index,BuildContext context) {
+    bool isSelected = _colorsCode[index] == activeColorCode;
 
     return InkWell(
       onTap: () {
-        colorIndex = index;
-        setState(() {});
+       WriteNoteCubitCubit.get(context).updateNoteColor(_colorsCode[index]);
+        
       },
       child: Container(
         height: 44,
         width: 44,
         decoration: BoxDecoration(
-          color: Color(colorCode),
+          color: Color(_colorsCode[index]),
           borderRadius: BorderRadius.circular(8),
         ),
         child: isSelected
