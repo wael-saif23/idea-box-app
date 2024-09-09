@@ -68,6 +68,9 @@ class WriteNoteCubitCubit extends Cubit<WriteNoteCubitState> {
         methodToExecute: () async {
           List<NoteModel> updatedNoteList = _getNotesListFromDataBase();
           updatedNoteList.removeAt(noteIdInDatabase);
+          for (var i = noteIdInDatabase; i < updatedNoteList.length; i++) {
+            updatedNoteList[i] = updatedNoteList[i].decrementIdAtDatabase();
+          }
           await noteBox.put(HiveConstants.noteList, updatedNoteList);
         },
         massage: 'Sorry an error occurred while deleting note.');
