@@ -6,13 +6,13 @@ class AppImages {
   /// assets/images/main_app_icon.png
   static const String imagesMainAppIcon = "assets/images/main_app_icon.png";
 
-  /// Assets for imagesNotFoundImage
-  /// assets/images/not_found_image.svg
-  static const String imagesNotFoundImage = "assets/images/not_found_image.svg";
+  /// Assets for imagesNotFoundImageSvg
+  /// assets/images/not_found_image_svg.svg
+  static const String imagesNotFoundImageSvg = "assets/images/not_found_image_svg.svg";
 
-  /// Assets for imagesNoteImage
-  /// assets/images/note_image.svg
-  static const String imagesNoteImage = "assets/images/note_image.svg";
+  /// Assets for imagesNoteImageSvg
+  /// assets/images/note_image_svg.svg
+  static const String imagesNoteImageSvg = "assets/images/note_image_svg.svg";
 
   /// Assets for imagesToSplashView
   /// assets/images/to_splash_view.png

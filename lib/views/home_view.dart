@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:idea_box_app/controller/read_note_cubit/read_note_cubit_cubit.dart';
 import 'package:idea_box_app/core/helper_functions/app_routes.dart';
+import 'package:idea_box_app/core/helper_functions/loading_widget.dart';
 import 'package:idea_box_app/core/utils/styles/app_colors.dart';
 import 'package:idea_box_app/model/note_model.dart';
 import 'package:idea_box_app/views/widgets/custom_button.dart';
 import 'package:idea_box_app/views/widgets/custom_note_item.dart';
+import 'package:idea_box_app/views/widgets/empty_notes_in_home_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -15,22 +19,34 @@ class HomeView extends StatelessWidget {
       appBar: _getAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: ListView.builder(
-          itemCount: notes.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: Expanded(
-                child: CustomNoteItem(
-                  onPressedToDatailsView: () {
-                    Navigator.pushNamed(context, AppRoutes.detailsView,
-                        arguments: notes[index]);
-                  },
-                  colorCode: notes[index].colorCode,
-                  title: notes[index].title,
-                ),
-              ),
-            );
+        child: BlocBuilder<ReadNoteCubitCubit, ReadNoteCubitState>(
+          builder: (context, state) {
+            if (state is ReadNoteCubitSuccessAll) {
+              return ListView.builder(
+                itemCount: notes.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: Expanded(
+                      child: CustomNoteItem(
+                        onPressedToDatailsView: () {
+                          Navigator.pushNamed(context, AppRoutes.detailsView,
+                              arguments: notes[index]);
+                        },
+                        colorCode: notes[index].colorCode,
+                        title: notes[index].title,
+                      ),
+                    ),
+                  );
+                },
+              );
+            } else if (state is ReadNoteCubitLoading) {
+              return const Center(
+                child: LoadingWidget(),
+              );
+            } else {
+              return const EmptyNotesInHomeView();
+            }
           },
         ),
       ),
@@ -56,7 +72,7 @@ class HomeView extends StatelessWidget {
         const SizedBox(
           width: 16,
         ),
-        CustomButton(iconData: Icons.priority_high_rounded, onTap: () {}),
+        CustomButton(iconData: Icons.delete_sweep_outlined, onTap: () {}),
         const SizedBox(
           width: 16,
         ),
