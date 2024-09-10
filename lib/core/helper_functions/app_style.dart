@@ -12,9 +12,10 @@ abstract class AppStyle {
         selectionHandleColor: Colors.white30,
       ),
       appBarTheme: const AppBarTheme(
+        titleSpacing: 16,
         backgroundColor: AppColors.black,
         elevation: 0,
-        titleTextStyle: AppFonts.NunitoSemiBold43,
+        titleTextStyle: AppFonts.NunitoSemiBold38,
       ),
     );
   }

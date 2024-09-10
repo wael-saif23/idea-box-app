@@ -39,22 +39,21 @@ class DetailsView extends StatelessWidget {
 
   AppBar _getAppBar(BuildContext context) {
     return AppBar(
-      leading: Row(
+      automaticallyImplyLeading: false,
+      title: Row(
         children: [
+           CustomButton(
+            iconData: Icons.arrow_back,
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
           const SizedBox(
             width: 16,
           ),
-          Expanded(
-            child: CustomButton(
-              iconData: Icons.arrow_back,
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
+          const Text('Details View'),
         ],
       ),
-      title: const Text('Details View'),
       actions: [
         CustomButton(
             iconData: Icons.edit,

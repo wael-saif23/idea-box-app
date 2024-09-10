@@ -9,10 +9,10 @@ import 'package:idea_box_app/core/helper_functions/app_style.dart';
 
 import 'package:idea_box_app/model/note_model_Adaptor.dart';
 
-void main()async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
- Hive.registerAdapter(NoteModelAdapter());
+  Hive.registerAdapter(NoteModelAdapter());
   await Hive.openBox(HiveConstants.noteBox);
   runApp(const IdeaBoxApp());
 }
@@ -25,7 +25,7 @@ class IdeaBoxApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => WriteNoteCubitCubit()),
-        BlocProvider(create: (context) => ReadNoteCubitCubit()),
+        BlocProvider(create: (context) => ReadNoteCubitCubit()..getAllNotes()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

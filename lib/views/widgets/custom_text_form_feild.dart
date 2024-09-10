@@ -3,14 +3,22 @@ import 'package:idea_box_app/core/utils/styles/app_colors.dart';
 
 class CustomTextFormFeild extends StatelessWidget {
   const CustomTextFormFeild(
-      {super.key, this.maxLines = 3, required this.lablelText, this.controller, this.onChanged});
+      {super.key,
+      this.maxLines = 3,
+      required this.lablelText,
+      this.controller,
+      this.onChanged,
+      this.addValidator,});
   final int maxLines;
   final String lablelText;
+  
   final TextEditingController? controller;
   final Function(String)? onChanged;
+  final VoidCallback? addValidator;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      
       controller: controller,
       minLines: 1,
       maxLines: maxLines,
@@ -20,9 +28,13 @@ class CustomTextFormFeild extends StatelessWidget {
       decoration: _getFieldDecoration(),
       onChanged: onChanged,
       validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Please enter some text';
-        }
+        (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter some text';
+          }
+          addValidator?.call();
+          return null;
+        };
         return null;
       },
     );

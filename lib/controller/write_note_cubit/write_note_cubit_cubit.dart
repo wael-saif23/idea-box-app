@@ -13,10 +13,11 @@ class WriteNoteCubitCubit extends Cubit<WriteNoteCubitState> {
       BlocProvider.of<WriteNoteCubitCubit>(context);
 
   final Box noteBox = Hive.box(HiveConstants.noteBox);
-
+  static GlobalKey<FormState> addNoteFormKey = GlobalKey<FormState>();
   String noteSubject = "";
   String noteDescription = "";
   int noteColorCode = 0xff000000;
+
 
   void updateNoteColor(int colorCode) {
     noteColorCode = colorCode;

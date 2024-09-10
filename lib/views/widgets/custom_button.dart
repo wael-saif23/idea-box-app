@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:idea_box_app/core/utils/styles/app_colors.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.iconData, required this.onTap});
-  final IconData iconData;
+  const CustomButton(
+      {super.key,
+      this.iconData,
+      required this.onTap,
+      this.text,
+      this.containerColor = AppColors.gray});
+  final IconData? iconData;
   final VoidCallback onTap;
+  final Text? text;
+  final Color? containerColor;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -12,17 +19,32 @@ class CustomButton extends StatelessWidget {
       child: Container(
         decoration: _getBoxDecoration(),
         padding: const EdgeInsets.all(8),
-        child: Icon(
-          iconData,
-          size: 28,
-          color: AppColors.orange,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (text != null) text!,
+            if (text != null && iconData != null)
+              const SizedBox(
+                height: 8,
+              ),
+            if (iconData != null)
+              Center(
+                child: Icon(
+                  iconData,
+                  size: 28,
+                  color: AppColors.orange,
+                ),
+              ),
+          ],
         ),
       ),
     );
   }
 
-  BoxDecoration _getBoxDecoration() => const BoxDecoration(
-        color: AppColors.gray,
-        borderRadius: BorderRadius.all(Radius.circular(12)),
+  BoxDecoration _getBoxDecoration() => BoxDecoration(
+        color: containerColor,
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
       );
 }
