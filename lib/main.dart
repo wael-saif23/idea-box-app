@@ -24,8 +24,10 @@ class IdeaBoxApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => WriteNoteCubitCubit()),
-        BlocProvider(create: (context) => ReadNoteCubitCubit()..getAllNotes()),
+        BlocProvider(create: (context) => WriteNoteCubitCubit(),),
+        BlocProvider(
+          create: (context) => ReadNoteCubitCubit()..getAllNotes(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

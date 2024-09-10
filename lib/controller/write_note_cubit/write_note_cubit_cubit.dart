@@ -14,10 +14,11 @@ class WriteNoteCubitCubit extends Cubit<WriteNoteCubitState> {
 
   final Box noteBox = Hive.box(HiveConstants.noteBox);
   static GlobalKey<FormState> addNoteFormKey = GlobalKey<FormState>();
+  static TextEditingController subjectController = TextEditingController();
+  static TextEditingController descriptionController = TextEditingController();
   String noteSubject = "";
   String noteDescription = "";
   int noteColorCode = 0xff000000;
-
 
   void updateNoteColor(int colorCode) {
     noteColorCode = colorCode;

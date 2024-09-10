@@ -10,7 +10,6 @@ import 'package:idea_box_app/views/widgets/custom_button.dart';
 import 'package:idea_box_app/views/widgets/custom_dialog.dart';
 import 'package:idea_box_app/views/widgets/custom_note_item.dart';
 import 'package:idea_box_app/views/widgets/empty_notes_in_home_view.dart';
-
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 

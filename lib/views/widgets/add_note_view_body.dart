@@ -15,8 +15,8 @@ class AddNoteViewBody extends StatefulWidget {
 }
 
 class _AddNoteViewBodyState extends State<AddNoteViewBody> {
-  TextEditingController subjectController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
+  TextEditingController subjectController = WriteNoteCubitCubit.subjectController;
+  TextEditingController descriptionController = WriteNoteCubitCubit.descriptionController;
   GlobalKey<FormState> addNoteFormKey = WriteNoteCubitCubit.addNoteFormKey;
   @override
   Widget build(BuildContext context) {
