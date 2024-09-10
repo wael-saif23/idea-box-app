@@ -8,21 +8,16 @@ import 'package:idea_box_app/views/widgets/add_note_view_body.dart';
 
 import 'package:idea_box_app/views/widgets/custom_button.dart';
 
-class AddNoteView extends StatefulWidget {
+class AddNoteView extends StatelessWidget {
   const AddNoteView({super.key});
-
-  @override
-  State<AddNoteView> createState() => _AddNoteViewState();
-}
-
-class _AddNoteViewState extends State<AddNoteView> {
-  GlobalKey<FormState> addNoteFormKey = WriteNoteCubitCubit.addNoteFormKey;
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<WriteNoteCubitCubit, WriteNoteCubitState>(
       listener: (context, state) {
         if (state is WriteNoteCubitSuccess) {
+          WriteNoteCubitCubit.subjectController.clear();
+          WriteNoteCubitCubit.descriptionController.clear();
           showSnackBar(context, "Note Added Successfully");
           Navigator.pop(context);
         } else if (state is WriteNoteCubitFailure) {
@@ -62,7 +57,7 @@ class _AddNoteViewState extends State<AddNoteView> {
       backgroundColor: AppColors.gray,
       foregroundColor: AppColors.orange,
       onPressed: () {
-        if (addNoteFormKey.currentState!.validate()) {
+        if (WriteNoteCubitCubit.addNoteFormKey.currentState!.validate()) {
           WriteNoteCubitCubit.get(context).addNote();
           ReadNoteCubitCubit.get(context).getAllNotes();
         }

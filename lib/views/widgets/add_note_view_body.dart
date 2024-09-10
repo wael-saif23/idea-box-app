@@ -5,19 +5,11 @@ import 'package:idea_box_app/controller/write_note_cubit/write_note_cubit_cubit.
 import 'package:idea_box_app/views/widgets/colors_wedget.dart';
 import 'package:idea_box_app/views/widgets/custom_text_form_feild.dart';
 
-class AddNoteViewBody extends StatefulWidget {
+class AddNoteViewBody extends StatelessWidget {
   const AddNoteViewBody({
     super.key,
   });
 
-  @override
-  State<AddNoteViewBody> createState() => _AddNoteViewBodyState();
-}
-
-class _AddNoteViewBodyState extends State<AddNoteViewBody> {
-  TextEditingController subjectController = WriteNoteCubitCubit.subjectController;
-  TextEditingController descriptionController = WriteNoteCubitCubit.descriptionController;
-  GlobalKey<FormState> addNoteFormKey = WriteNoteCubitCubit.addNoteFormKey;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,20 +18,20 @@ class _AddNoteViewBodyState extends State<AddNoteViewBody> {
           child: BlocBuilder<WriteNoteCubitCubit, WriteNoteCubitState>(
         builder: (context, state) {
           return Form(
-            key: addNoteFormKey,
+            key: WriteNoteCubitCubit.addNoteFormKey,
             child: Column(
               children: [
                 CustomTextFormFeild(
                   onChanged: (value) =>
                       WriteNoteCubitCubit.get(context).updateNoteSubject(value),
-                  controller: subjectController,
+                  controller: WriteNoteCubitCubit.subjectController,
                   lablelText: "Note Subject",
                 ),
                 const SizedBox(height: 16),
                 CustomTextFormFeild(
                   onChanged: (value) => WriteNoteCubitCubit.get(context)
                       .updateNoteDescription(value),
-                  controller: descriptionController,
+                  controller: WriteNoteCubitCubit.descriptionController,
                   maxLines: 10,
                   lablelText: "Note description",
                 ),
