@@ -16,9 +16,13 @@ class WriteNoteCubitCubit extends Cubit<WriteNoteCubitState> {
   static GlobalKey<FormState> addNoteFormKey = GlobalKey<FormState>();
   static TextEditingController subjectController = TextEditingController();
   static TextEditingController descriptionController = TextEditingController();
+   static GlobalKey<FormState> addEditNoteFormKey = GlobalKey<FormState>();
+  static TextEditingController editSubjectController = TextEditingController();
+  static TextEditingController editDescriptionController = TextEditingController();
   String noteSubject = "";
   String noteDescription = "";
   int noteColorCode = 0xff000000;
+ 
 
   void updateNoteColor(int colorCode) {
     noteColorCode = colorCode;
@@ -34,6 +38,8 @@ class WriteNoteCubitCubit extends Cubit<WriteNoteCubitState> {
     noteDescription = description;
     emit(WriteNoteCubitInitial());
   }
+
+  
 
   void addNote() async {
     _tryAndCatchBlock(

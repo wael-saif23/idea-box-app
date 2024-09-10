@@ -5,13 +5,13 @@ class CustomTextFormFeild extends StatelessWidget {
   const CustomTextFormFeild(
       {super.key,
       this.maxLines = 3,
-      required this.lablelText,
+     this.lablelText,
       this.controller,
       this.onChanged,
-      this.addValidator,});
+      this.addValidator, this.hintText,});
   final int maxLines;
-  final String lablelText;
-  
+  final String? lablelText;
+  final String? hintText;
   final TextEditingController? controller;
   final Function(String)? onChanged;
   final VoidCallback? addValidator;
@@ -42,6 +42,8 @@ class CustomTextFormFeild extends StatelessWidget {
 
   InputDecoration _getFieldDecoration() {
     return InputDecoration(
+      hintText: hintText,
+      hintStyle:  TextStyle(color: AppColors.gray.withOpacity(.7)),
       labelText: lablelText,
       labelStyle: TextStyle(color: AppColors.yellow.withOpacity(.5)),
       enabledBorder: const UnderlineInputBorder(

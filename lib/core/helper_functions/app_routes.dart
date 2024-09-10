@@ -34,9 +34,12 @@ class AppRoutes {
         );
 
       case editNoteView:
-        
+        final NoteModel note = settings.arguments as NoteModel;
         return MaterialPageRoute(
-          builder: (context) => const EditNoteView(),
+          builder: (context) =>  EditNoteView(
+            theNote: note,
+          ),
+          settings: RouteSettings(arguments: settings.arguments),
         );
 
       case addNoteView:
