@@ -44,7 +44,9 @@ class EditNoteView extends StatelessWidget {
             onTap: () {
               WriteNoteCubitCubit.get(context).updateNote(theNote.idAtDatabase);
               ReadNoteCubitCubit.get(context).getAllNotes();
-              Navigator.pop(context);
+              ReadNoteCubitCubit().getNote(noteIndex: theNote.idAtDatabase);
+               Navigator.pushReplacementNamed(context, AppRoutes.detailsView,
+                  arguments: theNote);
               WriteNoteCubitCubit.editSubjectController.clear();
               WriteNoteCubitCubit.editDescriptionController.clear();
               // Navigator.pushNamedAndRemoveUntil(context, AppRoutes.detailsView,

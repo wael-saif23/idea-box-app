@@ -23,8 +23,7 @@ class DetailsView extends StatelessWidget {
               if (state is ReadNoteCubitFailure) {
                 return const Center(child: Text('Something went wrong'));
               }else if(state is ReadNoteCubitSuccessOne){
-                
-                return _successReadNoteWidget();
+                return _successReadNoteWidget(state);
               }
               return const Center(child: CircularProgressIndicator());
             },
@@ -34,14 +33,14 @@ class DetailsView extends StatelessWidget {
     );
   }
 
-  SingleChildScrollView _successReadNoteWidget() {
+  SingleChildScrollView _successReadNoteWidget(ReadNoteCubitSuccessOne state) {
     
     return SingleChildScrollView(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      theNote.title,
+                      state.note.title,
                       style: AppFonts.NunitoRegular35,
                     ),
                     const Divider(
@@ -51,7 +50,7 @@ class DetailsView extends StatelessWidget {
                       height: 50,
                     ),
                     Text(
-                      theNote.description,
+                      state.note.description,
                       style: AppFonts.NunitoRegularWhite23,
                     ),
                   ]),
@@ -79,7 +78,7 @@ class DetailsView extends StatelessWidget {
         CustomButton(
             iconData: Icons.edit,
             onTap: () {
-              Navigator.pushNamed(context, AppRoutes.editNoteView,
+              Navigator.pushReplacementNamed(context, AppRoutes.editNoteView,
                   arguments: theNote);
             }),
         const SizedBox(
