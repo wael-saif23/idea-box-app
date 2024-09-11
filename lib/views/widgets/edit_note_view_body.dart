@@ -8,13 +8,17 @@ import 'package:idea_box_app/views/widgets/custom_text_form_feild.dart';
 class EditNoteViewBody extends StatelessWidget {
   const EditNoteViewBody({super.key, required this.theNote});
  final NoteModel theNote;
+ 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: SingleChildScrollView(
           child: BlocBuilder<WriteNoteCubitCubit, WriteNoteCubitState>(
+            
         builder: (context, state) {
+           WriteNoteCubitCubit.editSubjectController.text = theNote.title;
+          WriteNoteCubitCubit.editDescriptionController.text = theNote.description;
           return Form(
             key: WriteNoteCubitCubit.addEditNoteFormKey,
             child: Column(
@@ -23,7 +27,7 @@ class EditNoteViewBody extends StatelessWidget {
                   onChanged: (value) =>
                       WriteNoteCubitCubit.get(context).updateNoteSubject(value),
                   controller: WriteNoteCubitCubit.editSubjectController,
-                  hintText:theNote.title ,
+                  lablelText: "subject",
                 ),
                 const SizedBox(height: 16),
                 CustomTextFormFeild(
@@ -31,7 +35,7 @@ class EditNoteViewBody extends StatelessWidget {
                       .updateNoteDescription(value),
                   controller: WriteNoteCubitCubit.editDescriptionController,
                   maxLines: 10,
-                  hintText: theNote.description,
+                  lablelText: "description",
                 ),
                 const SizedBox(height: 16),
                 ColorsWedget(

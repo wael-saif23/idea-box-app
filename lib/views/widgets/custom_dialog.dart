@@ -11,11 +11,12 @@ class CustomDialog extends StatelessWidget {
       this.firstButtonText,
       this.secondbuttonText,
       this.onTapFirstButton,
-      this.onTapSecondButton});
+      this.onTapSecondButton, this.colorFirstButton, this.colorSecondButton});
   final String? title;
   final String? content;
   final String? firstButtonText, secondbuttonText;
   final VoidCallback? onTapFirstButton, onTapSecondButton;
+  final Color? colorFirstButton, colorSecondButton;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -45,9 +46,9 @@ class CustomDialog extends StatelessWidget {
         if (firstButtonText != null)
           CustomButton(
             text: Text(
-              'Cancel',
+              firstButtonText!,
               style: AppFonts.NunitoRegular18.copyWith(
-                color: AppColors.yellow.withOpacity(.9),
+                color:colorFirstButton?? AppColors.yellow.withOpacity(.9),
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -58,9 +59,9 @@ class CustomDialog extends StatelessWidget {
         if (secondbuttonText != null)
           CustomButton(
               text: Text(
-                'Delete',
+                secondbuttonText!,
                 style: AppFonts.NunitoRegular18.copyWith(
-                  color: AppColors.maroon,
+                  color:colorSecondButton?? AppColors.maroon,
                   fontWeight: FontWeight.bold,
                 ),
               ),

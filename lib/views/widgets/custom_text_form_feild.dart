@@ -8,17 +8,17 @@ class CustomTextFormFeild extends StatelessWidget {
      this.lablelText,
       this.controller,
       this.onChanged,
-      this.addValidator, this.hintText,});
+      this.addValidator, this.hintText, this.initialValue,});
   final int maxLines;
   final String? lablelText;
-  final String? hintText;
+  final String? hintText , initialValue;
   final TextEditingController? controller;
   final Function(String)? onChanged;
   final VoidCallback? addValidator;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      
+      initialValue: initialValue,
       controller: controller,
       minLines: 1,
       maxLines: maxLines,
