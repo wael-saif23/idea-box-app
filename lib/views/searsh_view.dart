@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:idea_box_app/controller/search_cubit/search_cubit.dart';
 import 'package:idea_box_app/core/helper_functions/app_routes.dart';
 import 'package:idea_box_app/core/helper_functions/loading_widget.dart';
 import 'package:idea_box_app/core/utils/styles/app_colors.dart';
@@ -12,16 +14,32 @@ class SearshView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 32, left: 16, right: 16),
-          child: Column(
-            children: [
-              _getAppBar(context),
-              _intialAndNotFoundStateWidget(
-                  context, 'Please , write what you want to search for'),
-            ],
+    return BlocProvider<SearchCubit>(
+      create: (context) => SearchCubit(),
+      child: Scaffold(
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 32, left: 16, right: 16),
+            child: BlocBuilder<SearchCubit, SearchState>(
+              builder: (context, state) {
+                return Column(
+                  children: [
+                    _getAppBar(context),
+                    if (state is SearchInitial)
+                      _intialAndNotFoundStateWidget(
+                          context, 'Search for notes'),
+                    if (state is SearchFailure)
+                      _intialAndNotFoundStateWidget(context, state.message),
+                    if (state is SearchSuccessWithNOItems)
+                      _intialAndNotFoundStateWidget(context, state.message),
+                    if (state is SearchSuccessInSubject)
+                      _successStateWidget(state.notes),
+                    if (state is SearchSuccessInDescription)
+                      _successStateWidget(state.notes),
+                  ],
+                );
+              },
+            ),
           ),
         ),
       ),
@@ -30,7 +48,10 @@ class SearshView extends StatelessWidget {
 
   _getAppBar(BuildContext context) {
     return SearchBar(
-      onChanged: (value) {},
+      controller: SearchCubit.searchController,
+      onChanged: (value) {
+        SearchCubit.get(context).search(value);
+      },
       hintText: 'Search for notes',
       hintStyle:
           const WidgetStatePropertyAll(TextStyle(color: AppColors.yellow)),
@@ -38,37 +59,50 @@ class SearshView extends StatelessWidget {
       leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
+            SearchCubit.searchController.clear();
           },
           icon: const Icon(
             Icons.arrow_back,
             color: AppColors.orange,
           )),
       trailing: [
-        IconButton(
-            onPressed: () {},
-            icon: IconButton(
+       IconButton(
               icon: const Icon(
                 Icons.clear,
                 color: AppColors.orange,
               ),
-              onPressed: () {},
-            )),
-        IconButton(
-            onPressed: () {
-              DropdownButton(
-                items: List<DropdownMenuItem<items>>.generate(
-                    items.values.length,
-                    (index) => DropdownMenuItem<items>(
-                          child: Text(items.values[index].toString()),
-                          onTap: () {},
-                        )),
-                onChanged: (value) {},
-              );
-            },
-            icon: const Icon(
-              Icons.arrow_downward,
-              color: AppColors.orange,
-            )),
+              onPressed: () {
+                 SearchCubit.searchController.clear();
+              },
+            ),
+        DropdownButton<SubjectOrDescription>(
+          value: SearchCubit.get(context).subjectOrDescription,
+          onChanged: (value) {
+            SearchCubit.get(context).updatSubjectOrDescription(value!);
+          },
+          items: const [
+            DropdownMenuItem(
+                value: SubjectOrDescription.subject, child: Text('IN Sub..')),
+            DropdownMenuItem(
+                value: SubjectOrDescription.description,
+                child: Text('IN Desc..')),
+          ],
+          icon: const Icon(
+            Icons.menu,
+            color: AppColors.orange,
+          ),
+          style: const TextStyle(
+            color: AppColors.orange,
+          ),
+          underline: Container(
+            height: 2,
+            color: AppColors.orange,
+          ),
+          dropdownColor: AppColors.black,
+        ),
+        const SizedBox(
+          width: 12,
+        )
       ],
     );
   }
@@ -110,10 +144,13 @@ class SearshView extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 16),
             child: Expanded(
               child: CustomNoteItem(
-                title: notesList[index].title,
+                title: SearchCubit.get(context).subjectOrDescription ==
+                        SubjectOrDescription.subject
+                    ? notesList[index].title
+                    : notesList[index].description,
                 colorCode: notesList[index].colorCode,
                 onTapOnItem: () {
-                  Navigator.pushNamed(context, AppRoutes.detailsView,
+                  Navigator.pushReplacementNamed(context, AppRoutes.detailsView,
                       arguments: notesList[index]);
                 },
               ),
