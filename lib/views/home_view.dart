@@ -43,7 +43,8 @@ class HomeView extends StatelessWidget {
   }
 
   ListView _getNotesWidget(ReadNoteCubitSuccessAll state) {
-    return ListView.builder(
+    return
+     ListView.builder(
       itemCount: state.notes.length,
       itemBuilder: (context, index) {
         return Padding(

@@ -9,12 +9,13 @@ class CustomNoteItem extends StatefulWidget {
     required this.colorCode,
     required this.title,
     this.onPressedToDatailsView,
-    this.onPressedToDeleteItem,
+    this.onPressedToDeleteItem, this.onTapOnItem,
   });
   final int colorCode;
   final String title;
   final VoidCallback? onPressedToDatailsView;
   final VoidCallback? onPressedToDeleteItem;
+  final VoidCallback? onTapOnItem;
 
   @override
   State<CustomNoteItem> createState() => _CustomNoteItemState();
@@ -26,7 +27,7 @@ class _CustomNoteItemState extends State<CustomNoteItem>
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
+      onTap: widget.onTapOnItem ?? () {
         _getOnTapOnItem(slidableController);
       },
       child: Container(
