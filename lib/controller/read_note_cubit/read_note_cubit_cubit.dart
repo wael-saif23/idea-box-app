@@ -13,12 +13,7 @@ class ReadNoteCubitCubit extends Cubit<ReadNoteCubitState> {
   static ReadNoteCubitCubit get(context) => BlocProvider.of(context);
 
   final Box noteBox = Hive.box(HiveConstants.noteBox);
-  // int noteIndex = -1;
 
-  // void updateNoteIndex(int index) {
-  //   noteIndex = index;
-  //   emit(ReadNoteCubitInitial());
-  // }
 
   void getNote({required int noteIndex}) {
     _tryAndCatchBlockOneNote(

@@ -8,7 +8,7 @@ abstract class AppFonts {
     fontFamily: KfontFamily,
     fontSize: 25,
     fontWeight: FontWeight.w400,
-    color: AppColors.black,
+    color: AppColors.white,
   );
 
   static const TextStyle NunitoRegular35 = TextStyle(

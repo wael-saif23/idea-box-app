@@ -4,6 +4,7 @@ import 'package:idea_box_app/views/add_note_view.dart';
 import 'package:idea_box_app/views/details_view.dart';
 import 'package:idea_box_app/views/edit_note_view.dart';
 import 'package:idea_box_app/views/home_view.dart';
+import 'package:idea_box_app/views/searsh_view.dart';
 import 'package:idea_box_app/views/splash_view.dart';
 
 class AppRoutes {
@@ -12,6 +13,7 @@ class AppRoutes {
   static const String detailsView = '/details view';
   static const String addNoteView = '/add note view';
   static const String editNoteView = '/edit note view';
+  static const String searchView = '/search view';
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case splash:
@@ -36,7 +38,7 @@ class AppRoutes {
       case editNoteView:
         final NoteModel note = settings.arguments as NoteModel;
         return MaterialPageRoute(
-          builder: (context) =>  EditNoteView(
+          builder: (context) => EditNoteView(
             theNote: note,
           ),
           settings: RouteSettings(arguments: settings.arguments),
@@ -45,6 +47,11 @@ class AppRoutes {
       case addNoteView:
         return MaterialPageRoute(
           builder: (context) => const AddNoteView(),
+        );
+
+      case searchView:
+        return MaterialPageRoute(
+          builder: (context) => const SearshView(),
         );
 
       default:

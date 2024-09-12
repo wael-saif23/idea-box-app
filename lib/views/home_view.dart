@@ -6,6 +6,7 @@ import 'package:idea_box_app/core/helper_functions/app_routes.dart';
 import 'package:idea_box_app/core/helper_functions/exception_widget.dart';
 import 'package:idea_box_app/core/helper_functions/loading_widget.dart';
 import 'package:idea_box_app/core/utils/styles/app_colors.dart';
+
 import 'package:idea_box_app/views/widgets/custom_button.dart';
 import 'package:idea_box_app/views/widgets/custom_dialog.dart';
 import 'package:idea_box_app/views/widgets/custom_note_item.dart';
@@ -20,7 +21,8 @@ class HomeView extends StatelessWidget {
       appBar: _getAppBar(context),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: BlocBuilder<ReadNoteCubitCubit, ReadNoteCubitState>(
+        child:
+         BlocBuilder<ReadNoteCubitCubit, ReadNoteCubitState>(
           builder: (context, state) {
             if (state is ReadNoteCubitSuccessAll) {
               if (state.notes.isEmpty) {
@@ -93,7 +95,9 @@ class HomeView extends StatelessWidget {
     return AppBar(
       title: const Text('Notes'),
       actions: [
-        CustomButton(iconData: Icons.search, onTap: () {}),
+        CustomButton(iconData: Icons.search, onTap: () {
+          Navigator.pushNamed(context, AppRoutes.searchView);
+        }),
         const SizedBox(
           width: 16,
         ),
